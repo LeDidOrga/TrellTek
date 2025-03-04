@@ -1,5 +1,5 @@
-import { createOrganization, getOrganizations, updateOrganization, deleteOrganization } from './workspaceService';
-import trelloClient from './trelloClient';
+import { createOrganization, getOrganizations, getOrganizationsBoards, updateOrganization, deleteOrganization } from './workspaceService.js';
+import trelloClient from './trelloClient.js';
 
 // Mock the trelloClient module
 jest.mock('./trelloClient');
@@ -58,6 +58,28 @@ describe('organizationService', () => {
         });
     });
 
+    describe('getOrganizationsBoards', () => {
+        it('should fetch organization boards', async () => {
+            const organizationId = 'org123';
+            const mockData = [{ id: 'board123', name: 'Board 1' }];
+
+            trelloClient.get.mockResolvedValue({ data: mockData });
+
+            const boards = await getOrganizationsBoards(organizationId);
+
+            expect(trelloClient.get).toHaveBeenCalledWith(`/organizations/${organizationId}/boards`);
+            expect(boards).toEqual(mockData);
+        });
+
+        it('should throw an error if fetching organization boards fails', async () => {
+            const organizationId = 'org123';
+            const errorMessage = 'Network Error';
+            trelloClient.get.mockRejectedValue(new Error(errorMessage));
+
+            await expect(getOrganizationsBoards(organizationId)).rejects.toThrow(`Error fetching organizations boards: ${errorMessage}`);
+        });
+    });
+    
     describe('updateOrganization', () => {
         it('should update an organization', async () => {
             const organizationId = 'org123';

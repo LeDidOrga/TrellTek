@@ -1,5 +1,5 @@
-import { getListsOnBoard, createList, updateList, deleteList } from './listService';
-import trelloClient from './trelloClient';
+import { getListsOnBoard, createList, updateList, deleteList } from './listService.js';
+import trelloClient from './trelloClient.js';
 
 // Mock the trelloClient module
 jest.mock('./trelloClient');

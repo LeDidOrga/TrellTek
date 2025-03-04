@@ -15,11 +15,12 @@ export async function getBoards(organizationId = '') {
 }
 
 // Create: Create a board
-export async function createBoard(organizationId, name) {
+export async function createBoard(organizationId, name, defaultLists = true) {
     try {
         const response = await trelloClient.post('/boards', {
             name,
-            idOrganization: organizationId
+            idOrganization: organizationId,
+            defaultLists: defaultLists
         });
         return response.data;
     } catch (error) {

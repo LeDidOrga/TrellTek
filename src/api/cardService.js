@@ -37,6 +37,28 @@ export async function updateCard(cardId, name, desc) {
     }
 }
 
+// Update: Update a card's list
+export async function updateCardList(cardId, listId) {
+    try {
+        const response = await trelloClient.put(`/cards/${cardId}`, {
+            idList: listId
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error updating card's list: ${error.message}`);
+    }
+}
+
+// Delete: Remove a label from a card
+export async function resetCardLabel(cardId, labelId) {
+    try {
+        const response = await trelloClient.delete(`/cards/${cardId}/idLabels/${labelId}`);
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error removing label from card: ${error.message}`);
+    }
+}
+
 // Delete: Delete a card
 export async function deleteCard(cardId) {
     try {

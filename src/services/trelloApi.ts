@@ -52,11 +52,13 @@ export const createBoard = async (
   name: string,
   orgId: string,
   desc: string = '',
+  defaultLists: boolean = true,
 ) => {
   const response = await trelloClient.post('/boards', {
     name,
     idOrganization: orgId,
     desc,
+    defaultLists,
   })
 
   const labelsToCreate = {

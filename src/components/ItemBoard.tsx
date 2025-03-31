@@ -24,45 +24,43 @@ export default function ItemBoard({
 
   return (
     <div className="w-full justify-center flex flex-col mt-8 text-center">
-      
       <div>
         <h1 className="text-5xl">{title}</h1>
         <span className="text-xl">{span}</span>
       </div>
       <div className="flex justify-end mr-8">
-
-      {isCreating ? (
-        <div className="flex items-center mt-6 self-center">
-          <input
-            type="text"
-            value={newItemName}
-            onChange={(e) => setNewItemName(e.target.value)}
-            className="p-2 border rounded-lg text-black"
-            autoFocus
+        {isCreating ? (
+          <div className="flex items-center mt-6 self-center">
+            <input
+              type="text"
+              value={newItemName}
+              onChange={(e) => setNewItemName(e.target.value)}
+              className="p-2 border rounded-lg text-black"
+              autoFocus
             />
-          <button
-            onClick={handleCreate}
-            className="ml-2 text-green-500 hover:text-green-700"
-          >
-            <Check size={20} />
-          </button>
-          <button
-            onClick={() => setIsCreating(false)}
-            className="ml-2 text-gray-500 hover:text-gray-700"
+            <button
+              onClick={handleCreate}
+              className="ml-2 text-green-500 hover:text-green-700"
             >
-            <X size={20} />
+              <Check size={20} />
+            </button>
+            <button
+              onClick={() => setIsCreating(false)}
+              className="ml-2 text-gray-500 hover:text-gray-700"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => setIsCreating(true)}
+            className="mt-6 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors self-center"
+          >
+            <Plus size={20} className="inline-block mr-2" /> Add Item
           </button>
-        </div>
-      ) : (
-        <button
-          onClick={() => setIsCreating(true)}
-          className="mt-6 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors self-center"
-        >
-          <Plus size={20} className="inline-block mr-2" /> Add Item
-        </button>
-      )}
+        )}
       </div>
-      <div className=" grid grid-cols-3 gap-12 p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-12 p-8">
         {items.map((item) => (
           <Item
             key={item.id}

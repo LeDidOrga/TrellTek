@@ -12,9 +12,16 @@ export default function Item({ item, onUpdate, onDelete, onSelect }) {
     setIsEditing(false);
   };
 
+  const handleButtonClick = (e) => {
+    e.stopPropagation(); // Prevent the click event from triggering onSelect
+  };
+
   return (
-    <div key={item.id} className="w-full h-96 p-8 bg-secondary-900 flex flex-col rounded-[2vw] relative"
-    onClick={() => onSelect(item.id)}>
+    <div
+      key={item.id}
+      className="w-full h-96 p-8 bg-secondary-900 flex flex-col rounded-[2vw] relative item"
+      onClick={() => onSelect(item.id)}
+    >
       <div className="flex justify-center items-center w-full relative mb-4">
         {isEditing ? (
           <input
@@ -30,19 +37,43 @@ export default function Item({ item, onUpdate, onDelete, onSelect }) {
         <div className="absolute right-0 flex gap-2">
           {isEditing ? (
             <>
-              <button onClick={handleSave} className="text-green-500 hover:text-green-700">
+              <button
+                onClick={(e) => {
+                  handleButtonClick(e); // Stop propagation
+                  handleSave();
+                }}
+                className="text-green-500 hover:text-green-700 check-button"
+              >
                 <Check size={20} />
               </button>
-              <button onClick={() => setIsEditing(false)} className="text-gray-500 hover:text-gray-700">
+              <button
+                onClick={(e) => {
+                  handleButtonClick(e); // Stop propagation
+                  setIsEditing(false);
+                }}
+                className="text-gray-500 hover:text-gray-700"
+              >
                 <X size={20} />
               </button>
             </>
           ) : (
             <>
-              <button onClick={() => setIsEditing(true)} className="text-gray-500 hover:text-emerald-600">
+              <button
+                onClick={(e) => {
+                  handleButtonClick(e); // Stop propagation
+                  setIsEditing(true);
+                }}
+                className="text-gray-500 hover:text-emerald-600 edit-button"
+              >
                 <Edit2 size={20} />
               </button>
-              <button onClick={() => onDelete(item.id)} className="text-gray-500 hover:text-red-600">
+              <button
+                onClick={(e) => {
+                  handleButtonClick(e); // Stop propagation
+                  onDelete(item.id);
+                }}
+                className="text-gray-500 hover:text-red-600 delete-button"
+              >
                 <Trash2 size={20} />
               </button>
             </>

@@ -28,11 +28,28 @@ Open your browser and go to `http://localhost:3000` to interact with the Kanban 
 
 ---
 
-### 5. Run the tests !
+## Running Cypress Tests
+
+To ensure everything is working correctly, you can run Cypress end-to-end tests.
+
+### 1. Install Cypress
 ```bash
-npx install cypress
+npm install cypress --save-dev
+```
+
+### 2. Open Cypress Test Runner
+```bash
 npx cypress open
 ```
+
+### 3. Run Cypress Tests in CLI
+```bash
+npx cypress run
+```
+
+This will execute all available tests in headless mode.
+
+---
 
 ## Project Structure
 
@@ -40,4 +57,6 @@ This project includes the following key features:
 
 - **Kanban board**: Manage tasks in different stages.
 - **User interface**: Clean and responsive layout.
+- **Cypress tests**: Automated end-to-end testing support.
 
+Feel free to contribute or report issues via GitHub.

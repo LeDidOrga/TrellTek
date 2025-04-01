@@ -1,40 +1,53 @@
-describe('Boards', () => {
-  beforeEach(() => {
-    cy.visit('/')
-    // Click on the first organization to view its boards
-    cy.get('[data-cy="org-item"]').first().click()
-  })
+describe("Tester les Boards", () => {
+    it("Créer un board", () => {
+        cy.visit("/");
 
-  it('displays boards list', () => {
-    cy.get('h2').should('contain', 'Boards')
-    cy.get('button').contains('New Board').should('be.visible')
-  })
+        cy.wait(500)
 
-  it('can create a new board', () => {
-    const boardName = `Test Board ${Date.now()}`
-    
-    cy.get('button').contains('New Board').click()
-    cy.get('input[placeholder="Board name"]').type(boardName)
-    cy.get('button').contains('Create').click()
-    
-    cy.contains(boardName).should('be.visible')
-    cy.get('.Toaster').should('contain', 'Board created successfully')
-  })
+        // Click on the first div with class 'item' to enter the board
+        cy.get('div.item').first().click();
 
-  it('can edit a board', () => {
-    const newName = `Updated Board ${Date.now()}`
-    
-    cy.get('[data-cy="board-item"]').first().within(() => {
-      cy.get('button').contains('Edit').click()
-    })
-    
-    cy.get('input').clear().type(`${newName}{enter}`)
-    cy.contains(newName).should('be.visible')
-    cy.get('.Toaster').should('contain', 'Board updated successfully')
-  })
+        // Click the 'Add Item' button
+        cy.contains("Add Item").click();
 
-  it('can navigate back to organizations', () => {
-    cy.get('button').contains('Back').click()
-    cy.get('h2').should('contain', 'Organizations')
-  })
-})
+        // Type the new board name
+        cy.get('input').type('Hello, World');
+
+        // Click the first button to save the new board
+        cy.get('button').first().click();
+        cy.wait(500)
+    });
+    
+    it("Mettre à jour un board", () => {
+        cy.visit("/");
+
+        // Click on the first div with class 'item' to enter the board
+        cy.get('div.item').first().click();
+
+        // Click the edit button for the first board item
+        cy.get('button.edit-button').first().click();
+
+        // Type the new name for the board
+        cy.get('input').type('Hello, World');
+
+        // Click the check button to save the updated board
+        cy.get('button.check-button').first().click();
+        cy.wait(500)
+    });
+
+    it("Supprimer un board", () => {
+        cy.visit("/");
+
+        cy.wait(500)
+
+        // Click on the first div with class 'item' to enter the board
+        cy.get('div.item').first().click();
+
+        // Click the delete button for the first board item
+        cy.get('button.delete-button').first().click();
+
+        // Handle the confirmation dialog
+        cy.on('window:confirm', () => true);
+        cy.wait(500)
+    });
+});

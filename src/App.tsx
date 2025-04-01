@@ -9,9 +9,9 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState<string | null>(null)
 
   return (
-    <div className="min-h-screen bg-emerald-50">
+    <div className="min-h-screen">
       <Toaster position="top-right" />
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-8 justify-center flex">
         {selectedBoard ? (
           <Board
             boardId={selectedBoard}

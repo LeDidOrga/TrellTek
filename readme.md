@@ -1,7 +1,7 @@
 
-# TrellTech - Kanban Project
+# Breathe - Kanban Project
 
-A task management tool using a Kanban board interface for efficient project management.
+Breathe is a lightweight management project tool. You won't feel overwhelmed ever again. Breathe, take a breath ! 
 
 ## Installation
 

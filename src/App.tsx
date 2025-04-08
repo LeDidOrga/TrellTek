@@ -9,25 +9,33 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState<string | null>(null)
 
   return (
-    <div className="min-h-screen">
-      <Toaster position="top-right" />
-      <div className="container mx-auto py-8 justify-center flex">
-        {selectedBoard ? (
-          <Board
-            boardId={selectedBoard}
-            onBack={() => setSelectedBoard(null)}
-          />
-        ) : selectedOrg ? (
-          <BoardList
-            orgId={selectedOrg}
-            onSelectBoard={setSelectedBoard}
-            onBack={() => setSelectedOrg(null)}
-          />
-        ) : (
-          <OrganizationList onSelectOrg={setSelectedOrg} />
-        )}
+      <div className="min-h-screen bg-[#F2F2F2]">
+          <nav className="flex justify-between items-center p-4">
+              <div className="flex items-center">
+                  <img className="h-8" src={"src/public/nuage.png"}/>
+                  <img className="h-8 pl-4" src={"src/public/Breathe.png"}/>
+              </div>
+              <button className="">profil</button>
+          </nav>
+
+          <Toaster position="top-right"/>
+          <div className="container mx-auto py-8 justify-center flex">
+              {selectedBoard ? (
+                  <Board
+                      boardId={selectedBoard}
+                      onBack={() => setSelectedBoard(null)}
+                  />
+              ) : selectedOrg ? (
+                  <BoardList
+                      orgId={selectedOrg}
+                      onSelectBoard={setSelectedBoard}
+                      onBack={() => setSelectedOrg(null)}
+                  />
+              ) : (
+                  <OrganizationList onSelectOrg={setSelectedOrg}/>
+              )}
+          </div>
       </div>
-    </div>
   )
 }
 

@@ -30,6 +30,18 @@ export interface TrelloCard {
   closed: boolean;
   due: string | null;
   labels: TrelloLabel[];
+  idMembers: string[];
+
+  members?: {
+    id: string;
+    username: string;
+    initials: string;
+  }[];
+}
+export interface TrelloMember {
+  id: string;
+  fullName: string;
+  avatarUrl?: string;
 }
 
 export interface TrelloLabel {

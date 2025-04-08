@@ -127,17 +127,20 @@ export const getCards = async (listId: string) => {
 }
 
 export const createCard = async (
-  name: string,
-  listId: string,
-  desc: string = '',
+    name: string,
+    listId: string,
+    desc: string = '',
+    due?: string
 ) => {
   const response = await trelloClient.post('/cards', {
     name,
     idList: listId,
     desc,
-  })
-  return handleResponse(response)
-}
+    due, // <-- important !
+  });
+  return handleResponse(response);
+};
+
 
 export const updateCard = async (
   cardId: string,
@@ -151,6 +154,10 @@ export const deleteCard = async (cardId: string) => {
   const response = await trelloClient.delete(`/cards/${cardId}`)
   return handleResponse(response)
 }
+export const getBoardMembers = async (boardId: string) => {
+  const response = await trelloClient.get(`/boards/${boardId}/members`);
+  return handleResponse(response);
+};
 
 export async function createLabelOnBoard(name, color, idBoard) {
   const validColors = [
